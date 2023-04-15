@@ -1,0 +1,43 @@
+<definitions
+    name = "EsercizioSOAP"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+
+    <types>
+
+    </types>
+
+    <message name = "conversioneInput">
+        <part name = "numeroInput" type = "xsd:int" />
+    </message>
+    <message name = "conversioneOutput">
+        <part name = "risultato" type = "xsd:double"></part>
+    </message>
+
+    <portType name = "conversioni">
+        <operation name = "cmPollici">
+            <input message = "tns:conversioneInput" />
+            <output message = "tns:conversioneOutput" />
+        </operation>
+    </portType>
+
+    <binding type = "conversioni" name = "binding1">
+        <soap:binding  style = "document" transport = "http://schemas.xmlsoap.org/soap/http"/>
+        <operation>
+            <soap:operation soapAction = "http://localhost:5500/cmPollici"/>
+            <input><soap:input use = "literal"/></input>
+            <output><soap:output use = "literal"/></output>
+        </operation>
+    </binding>
+
+    
+
+    <service>
+
+        <documentation>Server</documentation>
+
+        <port binding = "tns:binding1" name = "isBinding">
+            <soap:address location = "serverSOAP.php"/>
+        </port>
+    </service>
+
+</definitions>
